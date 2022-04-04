@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -7,8 +7,11 @@ const Container = styled.div`
 `;
 
 const index: React.FC = () => {
-  return <Container>Hello world!</Container>
+  return (
+    <>
+      <Container>Hello</Container>
+    </>
+  );
 };
 
 export default index;
-
