@@ -1,9 +1,11 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
+import useModal from "../hooks/useModal";
 import AirbnbLogoIcon from "../public/static/svg/logo/airbnb_logo.svg";
 import AirbnbLogoTextIcon from "../public/static/svg/logo/airbnb_logo_text.svg";
 import palette from "../styles/palette";
+import SingUpModal from "./SingUpModal";
 
 const Container = styled.div`
   position: sticky;
@@ -109,56 +111,28 @@ const Container = styled.div`
       margin: 8px 0;
       background-color: ${palette.gray_dd};
     }
-    .modal-wrapper {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      left: 0;
-      .modal-background {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.75);
-        z-index: 10;
-      }
-      .modal-contents {
-        width: 400px;
-        height: 400px;
-        background-color: white;
-        z-index: 11;
-      }
-    }
   }
 `;
 
 const Header: React.FC = () => {
-  const [modalOpened, setModalOpened] = useState(false);
+  const { openModal, ModalPortal } = useModal();
   return (
     <Container>
       <Link href="/">
         <a className="header-logo-wrapper">
-          <AirbnbLogoIcon className="header-logo" />
-          <AirbnbLogoTextIcon />
+          {/* <AirbnbLogoIcon className="header-logo" />
+          <AirbnbLogoTextIcon /> */}
         </a>
       </Link>
       <div className="header-auth-buttons">
-        <button className="header-sign-up-button">회원가입</button>
+        <button className="header-sign-up-button" onClick={openModal}>
+          회원가입
+        </button>
         <button className="header-login-buttons">로그인</button>
       </div>
-      {modalOpened && (
-        <div className="modal-wrapper">
-          <div
-            className="modal-background"
-            role="presentation"
-            onClick={() => setModalOpened(false)}
-          />
-          <div className="modal-contents" />
-        </div>
-      )}
+      <ModalPortal>
+        <SingUpModal />
+      </ModalPortal>
     </Container>
   );
 };
