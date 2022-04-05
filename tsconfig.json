@@ -14,6 +14,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    // "paths": {
+    //   "@stories/*": ["stories/*"],
+    //   "@components/*": ["components/*"],
+    //   "@hooks/*": ["hooks/*"],
+    //   "@pages/*": ["pages/*"],
+    //   "@svg/*": ["public/static/svg/*"],
+    //   "@styles/*": ["styles/*"]
+    // }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

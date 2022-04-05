@@ -1,5 +1,5 @@
 import React from "react";
-import SingUpModal from "../../components/SingUpModal";
+import SingUpModal from "../../components/auths/SignUpModal";
 import useModal from "../../hooks/useModal";
 
 const { ModalPortal } = useModal();

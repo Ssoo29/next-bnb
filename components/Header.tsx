@@ -5,7 +5,7 @@ import useModal from "../hooks/useModal";
 import AirbnbLogoIcon from "../public/static/svg/logo/airbnb_logo.svg";
 import AirbnbLogoTextIcon from "../public/static/svg/logo/airbnb_logo_text.svg";
 import palette from "../styles/palette";
-import SingUpModal from "./SingUpModal";
+import SingUpModal from "./auths/SignUpModal";
 
 const Container = styled.div`
   position: sticky;
@@ -120,8 +120,8 @@ const Header: React.FC = () => {
     <Container>
       <Link href="/">
         <a className="header-logo-wrapper">
-          {/* <AirbnbLogoIcon className="header-logo" />
-          <AirbnbLogoTextIcon /> */}
+          <AirbnbLogoIcon className="header-logo" />
+          <AirbnbLogoTextIcon />
         </a>
       </Link>
       <div className="header-auth-buttons">
