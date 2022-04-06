@@ -9,6 +9,7 @@ import Input from "../common/Input";
 import Selector from "../common/Selector";
 import { daysList, monthList, yearsList } from "../../lib/staticDats";
 import Button from "../common/Button";
+import { signupAPI } from "../../lib/api/auth";
 
 const Container = styled.div`
   width: 568px;
@@ -116,89 +117,107 @@ const SingUpModal: React.FC = () => {
     setPassword(event.target.value);
   };
 
+  const onSubmitSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      const signUpBody = {
+        email,
+        lastname,
+        firstname,
+        password,
+        birthday: new Date(
+          `${birthDay}-${birthMonth!.replace("월", "")}-${birthDay}`
+        ).toISOString(),
+      };
+      await signupAPI(signUpBody);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <Container>
-      <ClosedEyeIcon className="mordal-close-x-icon" />
-      <div className="input-wrapper">
-        <Input
-          placeholder="이메일 주소"
-          type="email"
-          name="email"
-          icon={<MailIcon />}
-          value={email}
-          onChange={onChangeEmail}
-        />
-      </div>
-      <div className="input-wrapper">
-        <Input
-          placeholder="이름(예:길동)"
-          icon={<PersonIcon />}
-          value={lastname}
-          onChange={onChangeLastname}
-        />
-      </div>
-      <div className="input-wrapper">
-        <Input
-          placeholder="성(예: 홍)"
-          icon={<PersonIcon />}
-          value={firstname}
-          onChange={onChangeFirstname}
-        />
-      </div>
-      <div className="input-wrapper sign-up-password-input-wrapper">
-        <Input
-          placeholder="비밀번호 설정하기"
-          type={hidePassword ? "password" : "text"}
-          icon={
-            hidePassword ? (
-              <ClosedEyeIcon onClick={toggleHidePassword} />
-            ) : (
-              <OpenedEyeIcon onClick={toggleHidePassword} />
-            )
-          }
-          value={password}
-          onChange={onChangePassword}
-        />
-      </div>
-      <p className="sign-up-birthdat-label">생일</p>
-      <p className="sign-up-modal-birthday-info">
-        만 18세 이상의 성인만 회원으로 가입할 수 있습니다. 생일은 다른
-        에어비앤비 이용자에게 공개되지 않습니다.
-      </p>
-      <div className="sign-up-modal-birthday-selectors">
-        <div className="sign-up-modal-birthday-month-selectorl">
-          <Selector
-            options={monthList}
-            disabledOptions={["월"]}
-            defaultValue="월"
-            value={birthMonth}
-            onChange={onChangeBirthMonth}
+      <form onSubmit={onSubmitSignUp}>
+        <div className="input-wrapper">
+          <Input
+            placeholder="이메일 주소"
+            type="email"
+            name="email"
+            icon={<MailIcon />}
+            value={email}
+            onChange={onChangeEmail}
           />
         </div>
-        <div className="sign-up-modal-birthday-day-selector">
-          <Selector
-            options={daysList}
-            disabledOptions={["일"]}
-            defaultValue="일"
-            value={birthDay}
-            onChange={onChangeBirthDay}
+        <div className="input-wrapper">
+          <Input
+            placeholder="이름(예:길동)"
+            icon={<PersonIcon />}
+            value={lastname}
+            onChange={onChangeLastname}
           />
         </div>
-        <div className="sign-up-modal-birthday-year-selector">
-          <Selector
-            options={yearsList}
-            disabledOptions={["년"]}
-            defaultValue="년"
-            value={birthYear}
-            onChange={onChangeBirthYear}
+        <div className="input-wrapper">
+          <Input
+            placeholder="성(예: 홍)"
+            icon={<PersonIcon />}
+            value={firstname}
+            onChange={onChangeFirstname}
           />
         </div>
-      </div>
-      <div className="sign-up-modal-submit-button-wrapper">
-        <Button type="submit" width="100%">
-          가입하기
-        </Button>
-      </div>
+        <div className="input-wrapper sign-up-password-input-wrapper">
+          <Input
+            placeholder="비밀번호 설정하기"
+            type={hidePassword ? "password" : "text"}
+            icon={
+              hidePassword ? (
+                <ClosedEyeIcon onClick={toggleHidePassword} />
+              ) : (
+                <OpenedEyeIcon onClick={toggleHidePassword} />
+              )
+            }
+            value={password}
+            onChange={onChangePassword}
+          />
+        </div>
+        <p className="sign-up-birthdat-label">생일</p>
+        <p className="sign-up-modal-birthday-info">
+          만 18세 이상의 성인만 회원으로 가입할 수 있습니다. 생일은 다른
+          에어비앤비 이용자에게 공개되지 않습니다.
+        </p>
+        <div className="sign-up-modal-birthday-selectors">
+          <div className="sign-up-modal-birthday-month-selectorl">
+            <Selector
+              options={monthList}
+              disabledOptions={["월"]}
+              defaultValue="월"
+              value={birthMonth}
+              onChange={onChangeBirthMonth}
+            />
+          </div>
+          <div className="sign-up-modal-birthday-day-selector">
+            <Selector
+              options={daysList}
+              disabledOptions={["일"]}
+              defaultValue="일"
+              value={birthDay}
+              onChange={onChangeBirthDay}
+            />
+          </div>
+          <div className="sign-up-modal-birthday-year-selector">
+            <Selector
+              options={yearsList}
+              disabledOptions={["년"]}
+              defaultValue="년"
+              value={birthYear}
+              onChange={onChangeBirthYear}
+            />
+          </div>
+        </div>
+        <div className="sign-up-modal-submit-button-wrapper">
+          <Button type="submit">가입하기</Button>
+        </div>
+      </form>
     </Container>
   );
 };
