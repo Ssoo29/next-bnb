@@ -127,7 +127,7 @@ const SingUpModal: React.FC = () => {
         firstname,
         password,
         birthday: new Date(
-          `${birthDay}-${birthMonth!.replace("월", "")}-${birthDay}`
+          `${birthDay}-${birthMonth?.replace("월", "")}-${birthDay}`
         ).toISOString(),
       };
       await signupAPI(signUpBody);

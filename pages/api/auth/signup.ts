@@ -44,9 +44,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const token = jwt.sign(String(newUser.id), "my_private_secret");
     res.setHeader(
       "Set-Cookie",
-      `access_token=${token}; path=/; expires=${new Date(
+      `access_token=${token}; Path=/; Expires=${new Date(
         Date.now() + 60 * 60 * 24 * 1000 * 3 //3일
-      )}; httponly`
+      ).toUTCString()}; Httponly`
     );
 
     const newUserWithoutPassword: Partial<Pick<
