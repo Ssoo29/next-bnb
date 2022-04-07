@@ -1,4 +1,4 @@
-import { StoredUserType } from './../../../types/user.type';
+import { StoredUserType } from '../../../types/user';
 import { NextApiRequest, NextApiResponse } from "next";
 import Data from "../../../lib/data";
 import bcrypt from "bcryptjs";

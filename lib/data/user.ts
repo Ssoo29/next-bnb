@@ -1,5 +1,5 @@
 import { readFileSync, writeFileSync } from "fs";
-import { StoredUserType } from "../../types/user.type";
+import { StoredUserType } from "../../types/user";
 
 
 //* 유저 리스트 데이터 불러오기
